@@ -7,7 +7,7 @@
           <h3>{{ product.title}}</h3>
           <ul>
             <li v-for="item in product.list">
-              <a :href="item.url">{{ item.name }}</a>
+              <a target="_bank" :href="item.url">{{ item.name }}</a>
               <span v-if="item.hot" class="hot-tag">Hot</span>
             </li>
           </ul>
@@ -24,7 +24,7 @@
       </div>
     </div>
     <div class="index-right">
-      <slide-show :slides="slides" :inv="invTime"></slide-show>
+      <Slider :slides="slides" :inv="invTime" @onchange="doSomethingOnSlideChange"></Slider>
       <div class="index-board-list">
         <div
         class="index-board-item"
@@ -43,28 +43,37 @@
   </div>
 </template>
 <script>
+import Slider from '../components/slider';
 export default {
+   components:{
+      Slider
+   },
+   methods:{
+    doSomethingOnSlideChange () {
+      console.log('doSomethingOnSlideChange run ! '+this.index)
+    }
+   },
    data () {
     return {
-      invTime: 2000,
+      invTime: 3000,
       slides: [
         {
-          src: require('../assets/slideShow/pic1.jpg'),
+          src: require('../assets/slider/pic1.jpg'),
           title: 'xxx1',
           href: 'detail/analysis'
         },
         {
-          src: require('../assets/slideShow/pic2.jpg'),
+          src: require('../assets/slider/pic2.jpg'),
           title: 'xxx2',
           href: 'detail/count'
         },
         {
-          src: require('../assets/slideShow/pic3.jpg'),
+          src: require('../assets/slider/pic3.jpg'),
           title: 'xxx3',
           href: 'http://xxx.xxx.com'
         },
         {
-          src: require('../assets/slideShow/pic4.jpg'),
+          src: require('../assets/slider/pic4.jpg'),
           title: 'xxx4',
           href: 'detail/forecast'
         }
